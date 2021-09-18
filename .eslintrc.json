@@ -1,3 +1,41 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+      "arrow-body-style": ["error", "always"],
+      "no-unused-vars": "off",
+      "strict": "off",
+      "lines-around-directive": "off",
+      "linebreak-style": "off",
+      "comma-dangle": "off",
+      "eol-last": "off",
+      "import/extensions": ["error", "never"],
+      "class-methods-use-this": "off",
+      "max-len": "off",
+      "import/no-dynamic-require": "off",
+      "global-require": "off",
+      "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "prefer-destructuring": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/forbid-prop-types": "off",
+      "react/jsx-props-no-spreading": "off",
+      "anchor-is-valid": "off",
+      "no-use-before-define": "off"
+    }
 }
