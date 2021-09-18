@@ -9,7 +9,7 @@ export default function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.push(`/events/search?term=${term}`);
+    router.push(`/courses/search?term=${term}`);
     setTerm('');
   };
 

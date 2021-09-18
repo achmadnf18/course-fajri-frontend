@@ -36,6 +36,8 @@
       "react/forbid-prop-types": "off",
       "react/jsx-props-no-spreading": "off",
       "anchor-is-valid": "off",
-      "no-use-before-define": "off"
+      "no-use-before-define": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "jsx-a11y/label-has-associated-control": "off"
     }
 }

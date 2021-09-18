@@ -7,13 +7,13 @@ export default function Pagination({ page, total }) {
   return (
     <>
       {page > 1 && (
-        <Link href={`/events?page=${page - 1}`}>
+        <Link href={`/courses?page=${page - 1}`}>
           <button type="button" className="btn-secondary">Prev</button>
         </Link>
       )}
 
       {page < lastPage && (
-        <Link href={`/events?page=${page + 1}`}>
+        <Link href={`/courses?page=${page + 1}`}>
           <button type="button" className="btn-secondary">Next</button>
         </Link>
       )}

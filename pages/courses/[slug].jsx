@@ -1,5 +1,8 @@
 import { ToastContainer, toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import currency from 'currency.js';
+import ReactStars from 'react-rating-stars-component';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaPencilAlt, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
@@ -9,46 +12,57 @@ import Layout from '../../components/Layout';
 import { API_URL } from '../../config/index';
 import styles from '../../styles/Event.module.css';
 
-export default function EventPage({ course }) {
+export default function CoursePage({ course }) {
   const router = useRouter();
 
+  const imageFormats = course.upload_file_morph ? JSON.parse(course.upload_file_morph.upload_file.formats) : null;
   return (
     <Layout>
       <div className={styles.event}>
         <span>
-          {new Date(course.date).toLocaleDateString('en-US')}
+          {moment(course.created_at).format('DD MMM YYYY')}
           {' '}
           at
-          {course.time}
+          {' '}
+          {moment(course.created_at).format('HH:mm')}
         </span>
         <h1>{course.name}</h1>
         <ToastContainer />
-        {course.image && (
+        {imageFormats && (
           <div className={styles.image}>
             <Image
-              src={course.image.formats.medium.url}
+              src={imageFormats.medium.url}
               width={960}
               height={600}
             />
           </div>
         )}
 
-        <h3>Performers:</h3>
-        <p>{course.performers}</p>
+        <h3>Instructor:</h3>
+        <p>{course.instructor}</p>
         <h3>Description:</h3>
         <p>{course.description}</p>
         <h3>
-          Venue:
-          {course.venue}
+          {currency(course.price, { precision: '0', symbol: 'Rp. ' }).format()}
         </h3>
-        <p>{course.address}</p>
+        <ReactStars
+          count={5}
+          value={parseFloat(course.rating)}
+          size={24}
+          edit={false}
+          isHalf
+          emptyIcon={<i className="far fa-star" />}
+          halfIcon={<i className="fa fa-star-half-alt" />}
+          fullIcon={<i className="fa fa-star" />}
+          activeColor="#ffd700"
+        />
 
-        <Link href="/events">
-          <span className={styles.back}>
+        <Link href="/">
+          <a className={styles.back}>
             {'<'}
             {' '}
             Go Back
-          </span>
+          </a>
         </Link>
       </div>
     </Layout>
@@ -56,16 +70,17 @@ export default function EventPage({ course }) {
 }
 
 export async function getServerSideProps({ query: { slug } }) {
-  const res = await fetch(`${API_URL}/events?slug=${slug}`);
-  const events = await res.json();
+  const courseRes = await fetch(`${API_URL}/api/v1/courses/detail/${slug}`);
+  const res = await courseRes.json();
+  const courses = res.data || {};
 
   return {
     props: {
-      evt: events[0],
+      course: courses,
     },
   };
 }
 
-EventPage.propTypes = {
+CoursePage.propTypes = {
   course: PropTypes.object.isRequired
 };

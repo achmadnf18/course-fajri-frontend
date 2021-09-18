@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import Layout from '../../components/Layout';
-import CourseItem from '../../components/CourseItem';
+import CategoriesItem from '../../components/CategoriesItem';
 import Pagination from '../../components/Pagination';
 import { API_URL, PER_PAGE } from '../../config/index';
 
-export default function CoursesPage({ courses, page, total }) {
+export default function CategoriesPage({ categories, page, total }) {
   return (
     <Layout>
-      <h1>Courses</h1>
-      {courses.length === 0 && <h3>No courses to show</h3>}
+      <Link href="/courses">{'< All Courses'}</Link>
+      <h1>Categories</h1>
+      {categories.length === 0 && <h3>No categories to show</h3>}
 
-      {courses.map((crs) => {
+      {categories.map((crs) => {
         return (
-          <CourseItem key={crs.id} course={crs} />
+          <CategoriesItem key={crs.id} categories={crs} />
         );
       })}
 
@@ -28,18 +30,18 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 
   // Fetch courses
   const courseRes = await fetch(
-    `${API_URL}/api/v1/courses?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
+    `${API_URL}/api/v1/courses/category?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
   );
   const res = await courseRes.json();
-  const courses = res.data || [];
+  const categories = res.data || [];
 
   return {
-    props: { courses, page: +page, total },
+    props: { categories, page: +page, total },
   };
 }
 
-CoursesPage.propTypes = {
-  courses: PropTypes.array.isRequired,
+CategoriesPage.propTypes = {
+  categories: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired
 };

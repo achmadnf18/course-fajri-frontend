@@ -6,13 +6,13 @@ import AuthContext from '../context/AuthContext';
 import styles from '../styles/Header.module.css';
 
 export default function Header() {
-  // const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link href="/">
-          DJ Events
+          Course Fajri
         </Link>
       </div>
 
@@ -21,23 +21,18 @@ export default function Header() {
       <nav>
         <ul>
           <li>
-            <Link href="/events">
-              Events
+            <Link href="/courses">
+              Courses
             </Link>
           </li>
-          {/* {user ? (
+          <li>
+            <Link href="/categories">
+              Categories
+            </Link>
+          </li>
+          {user ? (
             // If logged in
             <>
-              <li>
-                <Link href="/events/add">
-                  Add Event
-                </Link>
-              </li>
-              <li>
-                <Link href="/account/dashboard">
-                  Dashboard
-                </Link>
-              </li>
               <li>
                 <button
                   type="button"
@@ -63,7 +58,7 @@ export default function Header() {
                 </Link>
               </li>
             </>
-          )} */}
+          )}
         </ul>
       </nav>
     </header>

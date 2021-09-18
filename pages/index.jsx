@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
-import EventItem from '../components/EventItem';
+import CourseItem from '../components/CourseItem';
 import Pagination from '../components/Pagination';
 import { API_URL, PER_PAGE } from '../config/index';
 
 export default function CoursesPage({ courses, page, total }) {
   return (
     <Layout>
-      <h1>Events</h1>
-      {courses.length === 0 && <h3>No events to show</h3>}
+      <h1>Courses</h1>
+      {courses.length === 0 && <h3>No courses to show</h3>}
 
-      {(courses || []).map((evt) => {
+      {(courses || []).map((crs) => {
         return (
-          <EventItem key={evt.id} evt={evt} />
+          <CourseItem key={crs.id} course={crs} />
         );
       })}
 

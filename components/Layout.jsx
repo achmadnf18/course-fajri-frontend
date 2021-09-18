@@ -34,7 +34,7 @@ Layout.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   keywords: PropTypes.string,
-  children: PropTypes.element
+  children: PropTypes.any
 };
 
 Layout.defaultProps = {
