@@ -15,7 +15,9 @@ import styles from '../../styles/Event.module.css';
 export default function CoursePage({ course }) {
   const router = useRouter();
 
-  const imageFormats = course.upload_file_morph ? JSON.parse(course.upload_file_morph.upload_file.formats) : null;
+  let imageFormats = course.upload_file_morph ? course.upload_file_morph.upload_file.formats : null;
+  if (typeof imageFormats !== 'object' && imageFormats != null) imageFormats = JSON.parse(imageFormats);
+
   return (
     <Layout>
       <div className={styles.event}>
