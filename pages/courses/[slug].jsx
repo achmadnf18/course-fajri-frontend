@@ -70,7 +70,7 @@ export default function CoursePage({ course }) {
 }
 
 export async function getServerSideProps({ query: { slug } }) {
-  const courseRes = await fetch(`${API_URL}/api/v1/courses/detail/${slug}`);
+  const courseRes = await fetch(`${API_URL}api/v1/courses/detail/${slug}`);
   const res = await courseRes.json();
   const courses = res.data || {};
 

@@ -36,7 +36,7 @@ export async function getServerSideProps({ query: { term, page = 1 } }) {
 
   // Fetch courses
   const courseRes = await fetch(
-    `${API_URL}/api/v1/courses/discovery?s=${term}`
+    `${API_URL}api/v1/courses/discovery?s=${term}`
   );
   const res = await courseRes.json();
   const courses = res.data || [];

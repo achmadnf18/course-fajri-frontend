@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   // Register user
   const register = async (usr) => {
-    const res = await fetch(`${API_URL}/api/v1/auth/register`, {
+    const res = await fetch(`${API_URL}api/v1/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   // Login user
   const login = async ({ email, password }) => {
-    await API.post(`${API_URL}/api/v1/auth/login`, { email, password })
+    await API.post(`${API_URL}api/v1/auth/login`, { email, password })
       .then((res) => {
         localStorage.setItem('token', res.data.token);
         setUser(res.data.user);
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
   // Logout user
   const logout = async () => {
-    await API.post(`${API_URL}/api/v1/auth/logout`).then((res) => {
+    await API.post(`${API_URL}api/v1/auth/logout`).then((res) => {
       localStorage.removeItem('token');
       setUser(null);
       router.push('/');
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user is logged in
   const checkUserLoggedIn = async () => {
-    await API.get(`${API_URL}/api/v1/auth/checkToken`).then((res) => {
+    await API.get(`${API_URL}api/v1/auth/checkToken`).then((res) => {
       if (!res.status) throw new Error('Session Expired');
 
       const jwt = localStorage.getItem('token');

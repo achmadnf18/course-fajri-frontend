@@ -28,7 +28,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 
   // Fetch courses
   const courseRes = await fetch(
-    `${API_URL}/api/v1/courses?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
+    `${API_URL}api/v1/courses?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
   );
   const res = await courseRes.json();
   const courses = res.data || [];
