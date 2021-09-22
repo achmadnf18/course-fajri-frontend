@@ -7,6 +7,12 @@
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
+.sortbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .img {
   flex: 1;
   margin: 10px;
@@ -14,7 +20,6 @@
 
 .info {
   flex: 2;
-  margin: 10px;
 }
 
 @media (max-width: 600px) {

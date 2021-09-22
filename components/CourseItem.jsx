@@ -3,6 +3,8 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styles from '../styles/EventItem.module.css';
+import ReactStars from 'react-rating-stars-component';
+import currency from 'currency.js';
 
 export default function CourseItem({ course }) {
   return (
@@ -28,6 +30,20 @@ export default function CourseItem({ course }) {
           {moment(course.created_at).format('HH:mm')}
         </span>
         <h3>{course.name}</h3>
+        <ReactStars
+          count={5}
+          value={parseFloat(course.rating)}
+          size={20}
+          edit={false}
+          isHalf
+          emptyIcon={<i className="far fa-star" />}
+          halfIcon={<i className="fa fa-star-half-alt" />}
+          fullIcon={<i className="fa fa-star" />}
+          activeColor="#ffd700"
+        />
+        <h3>
+          {currency(course.price, { precision: '0', symbol: 'Rp. ' }).format()}
+        </h3>
       </div>
 
       <div className={styles.link}>
