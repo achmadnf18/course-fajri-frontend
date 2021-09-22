@@ -4,16 +4,18 @@ import {
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-} from "reactstrap";
+} from 'reactstrap';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import CourseItem from '../../components/CourseItem';
 import Pagination from '../../components/Pagination';
 import { API_URL, PER_PAGE } from '../../config/index';
 import styles from '../../styles/Courses.module.css';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 
-export default function CoursesPage({ courses, page, total, _sortBy, _sortType }) {
+export default function CoursesPage({
+  courses, page, total, _sortBy, _sortType
+}) {
   const [sortBy, setSortBy] = useState(_sortBy);
 
   const router = useRouter();
@@ -41,15 +43,15 @@ export default function CoursesPage({ courses, page, total, _sortBy, _sortType }
             </DropdownToggle>
 
             <DropdownMenu aria-labelledby="dropdownMenuButton">
-              <DropdownItem onClick={(e) => handleSort(e, 'Popularity', 'Popularity', 'desc')}>
+              <DropdownItem onClick={(e) => { return handleSort(e, 'Popularity', 'Popularity', 'desc'); }}>
                 Popularity
               </DropdownItem>
 
-              <DropdownItem onClick={(e) => handleSort(e, 'Lowest to Highest Price', 'Price', 'asc')}>
+              <DropdownItem onClick={(e) => { return handleSort(e, 'Lowest to Highest Price', 'Price', 'asc'); }}>
                 Lowest Price
               </DropdownItem>
 
-              <DropdownItem onClick={(e) => handleSort(e, 'Highest to Lower Price', 'Price', 'desc')}>
+              <DropdownItem onClick={(e) => { return handleSort(e, 'Highest to Lower Price', 'Price', 'desc'); }}>
                 Highest Price
               </DropdownItem>
             </DropdownMenu>
@@ -82,12 +84,16 @@ export async function getServerSideProps({ query: { page = 1, _sortBy = 'Popular
   const courses = res.data || [];
 
   return {
-    props: { courses, page: +page, total, _sortBy, _sortType },
+    props: {
+      courses, page: +page, total, _sortBy, _sortType
+    },
   };
 }
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired
+  total: PropTypes.number.isRequired,
+  _sortType: PropTypes.string.isRequired,
+  _sortBy: PropTypes.string.isRequired,
 };

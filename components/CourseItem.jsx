@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import styles from '../styles/EventItem.module.css';
 import ReactStars from 'react-rating-stars-component';
 import currency from 'currency.js';
+import styles from '../styles/EventItem.module.css';
 
 export default function CourseItem({ course }) {
   return (
